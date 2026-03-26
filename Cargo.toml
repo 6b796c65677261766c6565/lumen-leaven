@@ -16,6 +16,10 @@ esp-hal = { version = "0.21.0", features = [ "esp32c3" ] }
 esp-println = { version = "0.12.0", features = ["esp32c3", "log"] }
 embedded-hal = "1.0.0"
 log = { version = "0.4.22" }
+esp-wifi = { version = "0.10.1", features = ["esp32c3", "wifi", "dhcpv4", "tcp", "log"] }
+heapless = "0.8.0"
+smoltcp = { version = "0.11.0", default-features = false }
+
 [profile.dev]
 # Rust debug is too slow.
 # For debug builds always builds with some optimization
@@ -29,3 +33,7 @@ incremental = false
 lto = 'fat'
 opt-level = 's'
 overflow-checks = false
+
+# esp-wifi needs optimisation even in debug mode to function correctly.
+[profile.dev.package.esp-wifi]
+opt-level = 3
